@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubecrud-dep-1.05
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubecrud
+  template:
+    metadata:
+      labels:
+        app: kubecrud
+    spec:
+      containers:
+        - name: kubecrud
+          image: heseduud/kubecrud:1.05
