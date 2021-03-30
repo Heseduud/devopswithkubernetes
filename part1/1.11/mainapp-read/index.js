@@ -4,7 +4,9 @@ const app = express();
 const port = 5000;
 
 app.get('/', (r, s) => {
-  const data = fs.readFileSync('./files/logs.txt', 'utf8');
-  r.send(`<p>${data}</p>`);
+  const dataTimeHash = fs.readFileSync('./files/logs.txt', 'utf-8');
+  const dataPingPong = fs.readFileSync('./files/ponglogs.txt', 'utf-8');
+  s.send(`<p>${dataTimeHash} \n ${dataPingPong}</p>`);
 });
+
 app.listen(port, () => { console.log(`Server started in port ${port}`); });

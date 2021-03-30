@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mainapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mainapp
+  template:
+    metadata:
+      labels:
+        app: mainapp
+    spec:
+      volumes:
+        - name: shared-mainapp
+          persistentVolumeClaim:
+            claimName: pongmain-claim
+      containers:
+        - name: mainapp-gen
+          image: heseduud/mainapp-gen:1.11
+          volumeMounts:
+            - name: shared-mainapp
+              mountPath: /usr/src/app/files
+        - name: mainapp-read
+          image: heseduud/mainapp-read:1.11
+          volumeMounts:
+            - name: shared-mainapp
+              mountPath: /usr/src/app/files
