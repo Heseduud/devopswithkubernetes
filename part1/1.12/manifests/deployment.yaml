@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projectapp
+  template:
+    metadata:
+      labels:
+        app: projectapp
+    spec:
+      volumes:
+        - name: project-pvolume
+          persistentVolumeClaim:
+            claimName: project-claim
+      containers:
+        - name: projectapp
+          image: heseduud/kubeproject:1.12
+          volumeMounts:
+            - name: project-pvolume
+              mountPath: /usr/src/app/files
