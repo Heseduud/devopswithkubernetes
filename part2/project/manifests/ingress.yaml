@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: project-ing
+  annotations:
+    traefik.ingress.kubernetes.io/rule-type: "PathPrefixStrip"
+    ingress.kubernetes.io/enable-cors: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: projectfrontend-svc
+          servicePort: 3214
+      - path: /api/
+        backend:
+          serviceName: projectbackend-svc
+          servicePort: 5000
