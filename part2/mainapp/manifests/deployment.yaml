@@ -15,4 +15,7 @@ spec:
     spec:
       containers:
         - name: mainapp
-          image: heseduud/mainapp:2.01v4
+          image: heseduud/mainapp:2.06
+          envFrom:
+          - configMapRef:
+              name: env-configmap
