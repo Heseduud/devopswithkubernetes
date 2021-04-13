@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: pingpong-secret
+  namespace: applications
+spec:
+  encryptedData:
+    POSTGRES_PASSWORD: AgATwh3qzigJCK1dEZQh9z2dyT2hVrsgdS6T5kqmot+iiZT6YL6YXc9/QVM8zsd/HhOP5NdZzhEwM/xJPV87sAxInwcrs6txj5zIQr1l+p8IKqvXQFsxEmJe38/eZJuE4En1GzOXh+iCE75oe4etZJd14wSlWM6Kq2Nzv7YFSnjrx2+JgTV75n8YlHvVZ/hkU3TNF9xqKkPbEDZuaZyVOmRpAqworACH+5R12vyJFyfdbj0vpRBTov9U4d8HceTN74UIPzrpAfSgE63Q6WjWjFRlsVbgCEGRJDfd2t8ung/iBTquagZUtfv0EpCy4iaWyWUd/hAHku8ghWgdou7SN8NutebYw4anKPpVV5DfcbpFLb7yu6kP2MWp++KJMBDwwrB0cRIFlvYF0dFfBj22imjYni4ZjKc1qiSa6lPMefX0ek9JxZ0FLnmuvMvSQObYHMlBkQhlQ6EWCzAJ1Azgp0hv8pSv3ZyjF40th7Nl4kiIKFb5CSeOJMvYcgGRulaNlPB1kyCwIfPSU9ZLYQEkm9mivMgpiU2NJNOA/y6O6INIyUkurI6ljIY2e1b6Rt/JBI3m8BBP5XuLRysFPVt9cp3zRT6I3ZGmQZZW1EfkxgLP5C9rH6xlPqkwaS62xVXYoSpj3/kb04Oc5nXtciojHG+OZJScrEMmixuYgr7wKHZEmSF2u0hmZeAS95KQfRon7f7amdowYng=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: pingpong-secret
+      namespace: applications
+

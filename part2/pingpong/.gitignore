@@ -1,1 +1,3 @@
 node_modules
+# Did testing with docker-compose
+docker-compose.yaml
