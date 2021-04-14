@@ -9,11 +9,11 @@ spec:
   rules:
   - http:
       paths:
-      - path: /
+      - path: /ping
         backend:
           serviceName: mainapp-svc
           servicePort: 2345
-      - path: /pingpong
+      - path: /ping/pingpong
         backend:
           serviceName: pingpong-svc
           servicePort: 80

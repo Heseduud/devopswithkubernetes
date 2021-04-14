@@ -15,4 +15,4 @@ spec:
     spec:
       containers:
         - name: project-frontend
-          image: heseduud/projectfrontend:2.02v3
+          image: heseduud/projectfrontend:2.08

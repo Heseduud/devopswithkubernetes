@@ -11,7 +11,12 @@ const App = () => {
     const getTodos = async () => {
       const todoData = await Axios.get(`${baseUrl}/todos`);
       console.log(todoData);
-      setTodos(todoData.data);
+      var todoArr = [];
+      todoData.data.forEach(todo => {
+        todoArr.push(todo.todo);
+      });
+
+      setTodos(todoArr);
     }
 
     getTodos();
@@ -19,9 +24,11 @@ const App = () => {
 
   const handleTodoSubmit = async (e) => {
     e.preventDefault();
-    const newTodos = await Axios.post(`${baseUrl}/todos`, { todo: todoInput });
-    console.log(newTodos);
-    setTodos(newTodos.data);
+    const res = await Axios.post(`${baseUrl}/todos`, { todo: todoInput });
+    if (res.status === 201) {
+      const nt = todos.concat(todoInput);
+      setTodos(nt);
+    }
   };
 
   return (
@@ -41,7 +48,9 @@ const App = () => {
       </form>
       <ul>
         {
-          todos.map((todo) => <li>{todo}</li>) 
+          todos.length !== 0 
+          ? todos.map((todo) => <li>{todo}</li>)
+          : <li>No todos!</li>
         }
       </ul>
     </div>

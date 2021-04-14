@@ -1,14 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { Pool } = require('pg');
 const axios = require('axios');
 const cors = require('cors');
 
 const app = express();
+const pool = new Pool();
 const port = 5000;
 
 var imgDate = new Date();
-var todos = ['TODO1', 'TODO2'];
 
 const imgPath = path.resolve(__dirname, 'files', 'photo.jpg');
 const timestampPath = path.resolve(__dirname, 'files', 'timestamp.txt');
@@ -59,12 +60,23 @@ const downloadImage = async () => {
 }
 
 app.post('/todos', (req, res) => {
-  todos = todos.concat(req.body.todo);
-  res.json(todos);
+  pool.query('INSERT INTO todos (todo) VALUES ($1)', [req.body.todo], (err, resdb) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.status(201).send('Insert succesful');
+  })
 });
 
 app.get('/todos', (req, res) => {
-  res.json(todos);
+  pool.query('SELECT * FROM todos ORDER BY ID ASC', (err, resdb) => {
+    if (err) {
+      console.log(err);
+    }
+
+    res.status(200).json(resdb.rows)
+  })
 })
 
 app.get('/getImage', async (req, res) => {
@@ -84,4 +96,20 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server started in port ${port}`);
+
+  pool.query('CREATE SCHEMA IF NOT EXISTS todos', (err, res) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    }
+  });
+
+  pool.query(`CREATE TABLE IF NOT EXISTS todos (
+    ID SERIAL PRIMARY KEY,
+    todo VARCHAR NOT NULL
+  )`, (err, res) => {
+    if (err) {
+      console.log(err);
+    }
+  });
 });

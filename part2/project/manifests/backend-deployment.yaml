@@ -19,7 +19,33 @@ spec:
             claimName: project-claim
       containers:
         - name: project-backend
-          image: heseduud/projectbackend:2.02v2
+          image: heseduud/projectbackend:2.08
           volumeMounts:
             - name: project-pvolume
               mountPath: /usr/src/app/files
+          env:
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: project-dbconfig
+                  key: postgres_hostaddr
+            - name: PGUSER
+              valueFrom:
+                configMapKeyRef:
+                  name: project-dbconfig
+                  key: postgres_user
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: project-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: project-dbconfig
+                  key: postgres_db
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: project-dbconfig
+                  key: project_db_port
