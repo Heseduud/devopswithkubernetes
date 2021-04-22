@@ -19,7 +19,7 @@ spec:
             claimName: project-claim
       containers:
         - name: project-backend
-          image: heseduud/projectbackend:2.08
+          image: heseduud/projectbackend:2.10v2
           volumeMounts:
             - name: project-pvolume
               mountPath: /usr/src/app/files

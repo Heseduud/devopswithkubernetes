@@ -65,7 +65,12 @@ app.post('/todos', (req, res) => {
       console.log(err);
     }
 
-    res.status(201).send('Insert succesful');
+    if (req.body.todo.length > 140) {
+      console.log(`Recieved message over 140 characters: ${req.body.todo}`);
+      res.status(403).send('Todo too long');
+    } else {
+      res.status(201).send('Insert succesful');
+    }
   })
 });
 
