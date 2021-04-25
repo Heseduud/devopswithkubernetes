@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: pingpong-dbconfig
+  namespace: applications
+data:
+  postgres_db: postgres
+  postgres_user: postgres
+  postgres_hostaddr: postgres-svc
+  pingpong_db_port: "5432"

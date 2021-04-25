@@ -1,3 +1,6 @@
 node_modules
 # Did testing with docker-compose
 docker-compose.yaml
+
+# Using regular secrets for gke just to save trouble from always re-applying / sealing secrets when cluster is deleted
+manifests/gke/gke-secret.yaml

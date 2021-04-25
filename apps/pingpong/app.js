@@ -49,6 +49,8 @@ app.listen(port, () => {
       console.log(err);
     }
 
+    console.log(res);
+
     pool.query(`INSERT INTO counter (counter)
     VALUES (0)`, (err, res) => {
       if (err) {
@@ -62,6 +64,12 @@ app.listen(port, () => {
       console.log(err);
     }
 
-    counter = res.rows[0].counter;
+    console.log(res);
+
+    if (res.rows[0].counter) {
+      counter = res.rows[0].counter;
+    } else {
+      counter = 0;
+    }
   })
 });

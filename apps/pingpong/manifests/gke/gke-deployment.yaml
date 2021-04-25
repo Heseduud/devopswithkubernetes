@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: applications
+  name: pingpong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pingpong
+  template:
+    metadata:
+      labels:
+        app: pingpong
+    spec:
+      containers:
+        - name: pingpong
+          image: heseduud/pingpong:3.01v2
+          env:
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_hostaddr
+            - name: PGUSER
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_user
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pingpong-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_db
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: pingpong_db_port
+                
