@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: applications
+  name: mainapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mainapp
+  template:
+    metadata:
+      labels:
+        app: mainapp
+    spec:
+      containers:
+        - name: mainapp
+          image: heseduud/mainapp:3.02v2
+          envFrom:
+          - configMapRef:
+              name: env-configmap

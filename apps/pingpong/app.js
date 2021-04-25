@@ -6,7 +6,7 @@ const { Pool } = require('pg');
 const pool = new Pool();
 var counter = 0;
 
-app.get('/', (req, res) => {
+app.get('/pingpong/', (req, res) => {
   counter++;
   pool.query('UPDATE counter SET counter = $1 WHERE id = true', [counter], (err, res) => {
     if (err) {
@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
   res.send(`<p>pong ${counter}</p>`);
 });
 
-app.get('/pongs', (req, res) => {
+app.get('/pingpong/pongs', (req, res) => {
   pool.query('SELECT * FROM counter', (err, dbres) => {
     if (err) {
       console.log(err);

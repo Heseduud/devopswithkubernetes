@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pingpong
-          image: heseduud/pingpong:3.01v2
+          image: heseduud/pingpong:3.02v2
           env:
             - name: PGHOST
               valueFrom:

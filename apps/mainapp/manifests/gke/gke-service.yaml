@@ -2,13 +2,13 @@ apiVersion: v1
 kind: Service
 metadata:
   namespace: applications
-  name: pingpong-svc
+  name: mainapp-svc
 spec:
   type: NodePort
   selector:
-    app: pingpong
+    app: mainapp
   ports:
   - name: http
     protocol: TCP
-    port: 80
-    targetPort: 3002
+    port: 2345
+    targetPort: 3000
