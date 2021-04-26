@@ -2,6 +2,8 @@ name: Release application
 
 on:
   push:
+    paths:
+      - "apps/project/**"
 
 env:
   GKE_CLUSTER: dwk-cluster
@@ -27,7 +29,7 @@ jobs:
       run: echo "::set-env name=IMAGE_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
 
     - name: Build image
-      run: docker build --tag "$IMAGE_WITH_TAG" .
+      run: docker build --tag "$IMAGE_WITH_TAG" -f apps/project/Dockerfile
 
     - name: Publish image
       run: docker push "$IMAGE_WITH_TAG"
