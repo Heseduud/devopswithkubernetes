@@ -101,7 +101,7 @@ app.get('/api/getImage', async (req, res) => {
 });
 
 app.get('/api', (req, res) => {
-  res.send('<p>Working as intended.</p>');
+  res.send('<p>Working as intended!</p>');
 });
 
 app.listen(port, () => {
