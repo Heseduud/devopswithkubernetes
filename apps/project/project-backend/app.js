@@ -17,6 +17,11 @@ const timestampPath = path.resolve(__dirname, 'files', 'timestamp.txt');
 app.use(express.json());
 app.use(cors());
 
+// Check if we're in GKE
+if (process.env.GKE='true') {
+  app.use(express.static('build'));
+}
+
 const checkDay = () => {
   const dateNow = new Date();
   if (fs.existsSync(timestampPath)) {
@@ -59,7 +64,7 @@ const downloadImage = async () => {
   });
 }
 
-app.post('/todos', (req, res) => {
+app.post('/api/todos', (req, res) => {
   pool.query('INSERT INTO todos (todo) VALUES ($1)', [req.body.todo], (err, resdb) => {
     if (err) {
       console.log(err);
@@ -74,7 +79,7 @@ app.post('/todos', (req, res) => {
   })
 });
 
-app.get('/todos', (req, res) => {
+app.get('/api/todos', (req, res) => {
   pool.query('SELECT * FROM todos ORDER BY ID ASC', (err, resdb) => {
     if (err) {
       console.log(err);
@@ -84,7 +89,7 @@ app.get('/todos', (req, res) => {
   })
 })
 
-app.get('/getImage', async (req, res) => {
+app.get('/api/getImage', async (req, res) => {
   if (checkDay() && fs.existsSync(imgPath)) {
     res.sendFile(imgPath);
   } else {
@@ -95,7 +100,7 @@ app.get('/getImage', async (req, res) => {
   }
 });
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
   res.send('<p>Working as intended!</p>');
 });
 
@@ -105,7 +110,7 @@ app.listen(port, () => {
   pool.query('CREATE SCHEMA IF NOT EXISTS todos', (err, res) => {
     if (err) {
       console.log(err);
-      throw err;
+      // throw err;
     }
   });
 

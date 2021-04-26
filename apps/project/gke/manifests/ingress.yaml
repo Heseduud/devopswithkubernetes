@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: project-ing
+  namespace: project
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: project-svc
+          servicePort: 5000

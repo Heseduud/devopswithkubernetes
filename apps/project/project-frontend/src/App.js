@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 
-const baseUrl = 'http://localhost:8081/api';
+const baseUrl = process.env.REACT_APP_BACKENDURL || '/api';
 
 const App = () => {
   const [todoInput, setTodoInput] = useState('');
