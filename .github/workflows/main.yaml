@@ -31,7 +31,7 @@ jobs:
       run: echo "::set-env name=IMAGE_WITH_TAG::gcr.io/${{ secrets.GKE_PROJECT }}/$IMAGE:${GITHUB_REF#refs/heads/}-$GITHUB_SHA"
 
     - name: Build image
-      run: docker build --tag "$IMAGE_WITH_TAG" --file ./apps/project/Dockerfile
+      run: docker build --file ./apps/project/Dockerfile --tag "$IMAGE_WITH_TAG" 
 
     - name: Publish image
       run: docker push "$IMAGE_WITH_TAG"
