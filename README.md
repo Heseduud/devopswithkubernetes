@@ -15,3 +15,10 @@ Exercises submitted in individual folders (with the exception of 1.3 and 1.4, wh
 ### Part 2
 
 Commits from d142b0dd9a1d8d0459927837b425e5a976e41cc8 to 5ae0e7d72d497c95d84c2cb565779278bb6adb13. See: https://github.com/Heseduud/devopswithkubernetes/commits/main
+
+### Part 3
+#### 3.06
+DBaaS is obviously more expensive than DIY databases. DBaaS requires less work though, as initialization, maintaining and backups are done by the cloud provider. These also seem way easier to do with DBaaS. So in general DBaaS = less work, more $ and DIY = more work, less $.
+
+#### 3.07
+I'll use the DIY one as I have it set up already.
