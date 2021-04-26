@@ -5,7 +5,6 @@ resources:
 - gke/manifests/dbconfig.yaml
 - gke/manifests/deployment.yaml
 - gke/manifests/gke-secret.yaml
-- gke/manifests/ingress.yaml
 - gke/manifests/persistentvolumeclaim.yaml
 - gke/manifests/service.yaml
 - gke/manifests/wikipedia-cronjob.yaml
