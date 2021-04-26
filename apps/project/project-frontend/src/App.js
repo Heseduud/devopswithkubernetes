@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <div>
-      <p>Test</p>
+      <p>Test!</p>
       <img src={`${baseUrl}/getImage`} alt='img should be visible here'/>
       <form onSubmit={handleTodoSubmit}>
         <div>
