@@ -23,6 +23,10 @@ spec:
           volumeMounts:
             - name: project-pvolume
               mountPath: /usr/src/app/files
+          resources:
+            limits:
+              cpu: "150m"
+              memory: "100Mi"
           env:
             - name: PGHOST
               valueFrom:

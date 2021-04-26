@@ -16,6 +16,10 @@ spec:
       containers:
         - name: mainapp
           image: heseduud/mainapp:3.02v2
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "50Mi"
           envFrom:
           - configMapRef:
               name: env-configmap

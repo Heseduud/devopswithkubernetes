@@ -16,6 +16,10 @@ spec:
       containers:
         - name: pingpong
           image: heseduud/pingpong:3.02v2
+          resources:
+            limits:
+              cpu: "50m"
+              memory: "50Mi"
           env:
             - name: PGHOST
               valueFrom:
