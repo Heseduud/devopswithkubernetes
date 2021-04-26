@@ -74,6 +74,7 @@ app.post('/api/todos', (req, res) => {
       console.log(`Recieved message over 140 characters: ${req.body.todo}`);
       res.status(403).send('Todo too long');
     } else {
+      console.log(`Recieved todo: ${req.body.todo}`);
       res.status(201).send('Insert succesful');
     }
   })
