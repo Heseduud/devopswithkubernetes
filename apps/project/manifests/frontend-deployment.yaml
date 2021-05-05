@@ -15,4 +15,16 @@ spec:
     spec:
       containers:
         - name: project-frontend
-          image: heseduud/projectfrontend:2.08
+          image: heseduud/projectfrontend:4.02
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /
+              port: 80
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+              path: /
+              port: 80

@@ -105,6 +105,22 @@ app.get('/api', (req, res) => {
   res.send('<p>Working as intended!</p>');
 });
 
+// Healthcheck endpoint for kube probes
+app.get('/healthz', (req, res) => {
+  console.log('healthcheck');
+  pool.query('SELECT * FROM todos', (err, dbres) => {
+    if (err) {
+      console.log(err);
+      res.sendStatus(500);
+    }
+    // We have Db connection AND todos schema/table exists
+    if (dbres.rows) {
+      console.log('healthcheck passed');
+      res.sendStatus(200);
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server started in port ${port}`);
 

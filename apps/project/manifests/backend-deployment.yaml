@@ -19,10 +19,22 @@ spec:
             claimName: project-claim
       containers:
         - name: project-backend
-          image: heseduud/projectbackend:2.10v2
+          image: heseduud/projectbackend:4.02v5
           volumeMounts:
             - name: project-pvolume
               mountPath: /usr/src/app/files
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 5000
+          livenessProbe:
+            initialDelaySeconds: 20
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 5000
           env:
             - name: PGHOST
               valueFrom:
