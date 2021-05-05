@@ -28,6 +28,18 @@ app.get('/pingpong/pongs', (req, res) => {
   });
 });
 
+// Healthcheck endpoint for kubernetes, checks if db connection established
+app.get('/healthz', (req, res) => {
+  pool.query('SELECT * FROM counter', (err, dbres) => {
+    // No connection to db if we get error
+    if (err) {
+      res.sendStatus(500);
+    }
+
+    res.sendStatus(200);
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server started in port ${port}`);
   // Create schema if doesn't exist

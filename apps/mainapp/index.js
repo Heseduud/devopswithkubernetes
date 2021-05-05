@@ -16,4 +16,18 @@ app.get('/', async (r, s) => {
   s.send(`<p> ${envMsg} \n ${dataTimeHash} \n ${dataPingPong.data.pongs}</p>`);
 });
 
+app.get('/healthz', async (req, res) => {
+  try {
+    const check = await axios.get('http://pingpong-svc/healthz');
+    if (check.status == 200) {
+      res.sendStatus(200);
+    } else {
+      res.sendStatus(500);
+    }
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 app.listen(port, () => { console.log(`Server started in port ${port}`); });

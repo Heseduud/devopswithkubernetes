@@ -15,7 +15,13 @@ spec:
     spec:
       containers:
         - name: mainapp
-          image: heseduud/mainapp:2.06
+          image: heseduud/mainapp:4.01v3
+          readinessProbe:
+            initialDelaySeconds: 10
+            periodSeconds: 5
+            httpGet:
+              path: /healthz
+              port: 3000
           envFrom:
           - configMapRef:
               name: env-configmap
