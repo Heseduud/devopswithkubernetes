@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  namespace: "project"
+  namespace: project
   name: project-rollout
 spec:
   replicas: 4
