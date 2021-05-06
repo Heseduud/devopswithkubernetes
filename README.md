@@ -22,3 +22,9 @@ DBaaS is obviously more expensive than DIY databases. DBaaS requires less work t
 
 #### 3.07
 I'll use the DIY one as I have it set up already.
+
+### Part 4
+#### 4.03 query
+```
+count(kube_pod_info {namespace="prometheus", created_by_kind="StatefulSet"})
+```
