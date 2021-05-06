@@ -64,6 +64,17 @@ const downloadImage = async () => {
   });
 }
 
+app.put('/api/todos/:id', (req, res) => {
+  pool.query('UPDATE todos SET done = true WHERE id = ($1)', [req.params.id], (err, resdb) => {
+    if (err) {
+      console.log(err);
+      res.status(404).send(`Todo with id ${req.params.id} not found.`);
+    } else {
+      res.status(200).send('Todo updated');
+    }
+  });
+});
+
 app.post('/api/todos', (req, res) => {
   pool.query('INSERT INTO todos (todo) VALUES ($1)', [req.body.todo], (err, resdb) => {
     if (err) {
@@ -115,7 +126,6 @@ app.get('/healthz', (req, res) => {
     }
     // We have Db connection AND todos schema/table exists
     if (dbres.rows) {
-      console.log('healthcheck passed');
       res.sendStatus(200);
     }
   });
@@ -133,7 +143,8 @@ app.listen(port, () => {
 
   pool.query(`CREATE TABLE IF NOT EXISTS todos (
     ID SERIAL PRIMARY KEY,
-    todo VARCHAR NOT NULL
+    todo VARCHAR NOT NULL,
+    done BOOLEAN NOT NULL DEFAULT false
   )`, (err, res) => {
     if (err) {
       console.log(err);

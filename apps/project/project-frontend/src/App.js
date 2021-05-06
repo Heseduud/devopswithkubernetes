@@ -13,7 +13,7 @@ const App = () => {
       console.log(todoData);
       var todoArr = [];
       todoData.data.forEach(todo => {
-        todoArr.push(todo.todo);
+        todoArr.push(`${todo.todo} | ${todo.done}`);
       });
 
       setTodos(todoArr);
