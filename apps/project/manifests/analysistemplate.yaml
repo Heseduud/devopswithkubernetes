@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  namespace: project
+  name: cpu-usage-rate
+spec:
+  metrics:
+  - name: cpu-usage-rate
+    initialDelay: 10m
+    successCondition: result > 0.1
+    provider:
+      prometheus:
+        address: http://kube-prometheus-stack-1619-prometheus.prometheus.svc.cluster.local:9090
+        # https://serverfault.com/questions/978932/how-to-get-cpu-usage-percentage-for-a-namespace-from-prometheus
+        query: scalar (sum (rate (container_cpu_usage_seconds_total{namespace="project"}[10m])) / sum(machine_cpu_cores) * 100)
