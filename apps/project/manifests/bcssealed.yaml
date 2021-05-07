@@ -1,0 +1,15 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: telegram-apikey
+  namespace: project
+spec:
+  encryptedData:
+    API_KEY: AgBooLVUezujbRQ+aaEz4Rz5hWUlkOPPd1vEz5nFOketyRsnhSvvm+Hm+yFZVATgY55QQudZ784FBpW02xC2k7l9GWg2puZJGCyOLCbcQPiEtnoHn//LO3jcuGxh8O+z+3ycGt3J8EKrJ6qWMkV1/EnxYXypfhQEr5k1phxY55a5Mjwa8V8UIE2Zx4ogQfsw9J8lzT+Vg9hPBCArQcQORpgbYneJRTjmyobM1Dq7fl+Ys+n0NzlQqNuq7SYPVV1sDsM5Kewyab/oHfUYm0lyhHiD/7AJ8E26mvXmTj9aA5pSXXnB34Zs0+F3TZcQv4o+YeK59mM81Wz8weSxSkVZg5WlXHdmG/uGBSYKVCEFFTmDhEk+YXSmUhuZIvVt0zs32PvEb8Co9CxVcAB+XxKVF5ZnkGUqIXPfYWCUxVCSeCEJicfbtWEWx6bEcBI6tQU78nYemz/nIubj0oiENuo4Jd/w7VkYTswOfpC/1iS37z8dg43KXXaKULDo3/lZxKlyDjngV28UH22/fy5xNgr3gBd5RIZsyrrRpNQln3s7GzZ1GSM7xDXQOVC++uWTmZPAwuivn/U+Rl9WMIvumQbxaUuGuMe2g0ntue3xaRBVWyjurb2sWfr0w9DuLqNl3PUVXxQ9LcbC3rDBqKSMYhcGe1rolUUGx4CzDz4J63No8JDlVjvpontzUMU3ncIe1BSnMHK05mIl8ZzOikDZv/oe5YS11xobVf8M+xg1eLONFfKLISpptQM5b+Qf2JkVjrJJ
+  template:
+    metadata:
+      creationTimestamp: null
+      name: telegram-apikey
+      namespace: project
+

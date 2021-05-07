@@ -4,6 +4,8 @@ const path = require('path');
 const { Pool } = require('pg');
 const axios = require('axios');
 const cors = require('cors');
+const { connect, JSONCodec, StringCodec } = require('nats');
+const { json } = require('express');
 
 const app = express();
 const pool = new Pool();
@@ -64,31 +66,58 @@ const downloadImage = async () => {
   });
 }
 
-app.put('/api/todos/:id', (req, res) => {
-  pool.query('UPDATE todos SET done = true WHERE id = ($1)', [req.params.id], (err, resdb) => {
-    if (err) {
-      console.log(err);
-      res.status(404).send(`Todo with id ${req.params.id} not found.`);
-    } else {
-      res.status(200).send('Todo updated');
-    }
-  });
+app.put('/api/todos/:id', async (req, res) => {
+  const dbRes = await pool.query('UPDATE todos SET done = true WHERE id = ($1) RETURNING *', [req.params.id]);
+  console.log('Db res: ' + dbRes);
+  console.log(JSON.stringify(dbRes));
+  if (process.env.NATS_URL) {
+    console.log('Sending nats message');
+    const nc = await connect({ servers: process.env.NATS_URL });
+    const jc = JSONCodec();
+    const s = dbRes.rows[0];
+    console.log(s)
+
+    const r = {
+      msg: 'Todo modified',
+      id: s.id,
+      todo: s.todo,
+      done: s.done
+    };
+
+    nc.publish('nats', jc.encode(r));
+    await nc.drain();
+    console.log('Nats message sent');
+  }
+
+  res.status(200).send('Todo updated');
 });
 
-app.post('/api/todos', (req, res) => {
-  pool.query('INSERT INTO todos (todo) VALUES ($1)', [req.body.todo], (err, resdb) => {
-    if (err) {
-      console.log(err);
+app.post('/api/todos', async (req, res) => {
+  if (req.body.todo.length > 140) { 
+    res.status(403).send('Todo too long'); 
+  } else {
+    const dbRes = await pool.query('INSERT INTO todos (todo) VALUES ($1) RETURNING *', [req.body.todo]);
+    console.log('Db rows: ' + JSON.stringify(dbRes.rows));
+    if (process.env.NATS_URL) {
+      console.log('Sending nats message');
+      const nc = await connect({ servers: process.env.NATS_URL });
+      const jc = JSONCodec();
+      const s = dbRes.rows[0];
+
+      const r = {
+        msg: 'New todo inserted: ',
+        id: s.id,
+        todo: s.todo,
+        done: s.done
+      };
+
+      nc.publish("nats", jc.encode(r));
+      await nc.drain();
+      console.log('Nats message sent');
     }
 
-    if (req.body.todo.length > 140) {
-      console.log(`Recieved message over 140 characters: ${req.body.todo}`);
-      res.status(403).send('Todo too long');
-    } else {
-      console.log(`Recieved todo: ${req.body.todo}`);
-      res.status(201).send('Insert succesful');
-    }
-  })
+    res.status(201).send('Insert succesful');
+  }
 });
 
 app.get('/api/todos', (req, res) => {
@@ -118,7 +147,6 @@ app.get('/api', (req, res) => {
 
 // Healthcheck endpoint for kube probes
 app.get('/healthz', (req, res) => {
-  console.log('healthcheck');
   pool.query('SELECT * FROM todos', (err, dbres) => {
     if (err) {
       console.log(err);

@@ -4,7 +4,7 @@ metadata:
   namespace: project
   name: project-backend-dep
 spec:
-  replicas: 1
+  replicas: 6
   selector:
     matchLabels:
       app: project-backend
@@ -19,7 +19,7 @@ spec:
             claimName: project-claim
       containers:
         - name: project-backend
-          image: heseduud/projectbackend:4.05
+          image: heseduud/projectbackend:4.06v21
           volumeMounts:
             - name: project-pvolume
               mountPath: /usr/src/app/files
@@ -61,3 +61,5 @@ spec:
                 configMapKeyRef:
                   name: project-dbconfig
                   key: project_db_port
+            - name: NATS_URL
+              value: nats://my-nats.default:4222
