@@ -28,3 +28,6 @@ I'll use the DIY one as I have it set up already.
 ```
 count(kube_pod_info {namespace="prometheus", created_by_kind="StatefulSet"})
 ```
+
+#### 4.07 & 4.08
+Can be found in this repo: https://github.com/Heseduud/kube-cluster-dwk
