@@ -1,0 +1,47 @@
+- Database:
+	- mongoDb, MySql outside the course
+	- PostgreSQL as the db for course apps
+	- Redis in part 1
+
+- Streaming and messaging
+	- NATS in part 5
+
+- Definition&Image build
+	- HELM to install prometheus, kubeseal etc on various parts
+
+- CI/CD
+	- flagger in part 5
+	- flux in GitOps exercise
+	- GitHub actions in parts 4 / 5
+
+- Scheduling & Orchestration
+	- Kubernetes, whole course
+
+- Coordination & Service Discovery
+	- CoreDNS with k3d
+
+- Service Proxy
+	- NGINX outside the course / in project frontend
+	- trafeik proxy with k3d
+
+- Service Mesh
+	- LINKERD in part 5 service mesh exercises
+
+- Container Registry
+	- Google Container Registry in part 3 GKE
+
+- Key Management
+	- OAuth2 outside the course
+
+- Platform
+	- Docker through the course
+
+- Hosted Kubernetes:
+	- GKE in part3 GKE exercises
+
+- Observability and Analysis
+	- Prometheus in various parts
+	- Grafana with prometheus
+
+- Logging
+	- Grafana loki with prometheus/grafana
