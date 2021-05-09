@@ -8,3 +8,4 @@ data:
   postgres_user: postgres
   postgres_hostaddr: postgres-svc
   pingpong_db_port: "5432"
+  pingpong-servport: "8080"

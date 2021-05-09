@@ -1,0 +1,44 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  namespace: applications
+  name: pingpong-serverless
+spec:
+  template:
+    metadata:
+      name: pingpong-serverless-dwk
+    spec:
+      containers:
+        - name: pingpong-serverless-dwk
+          image: heseduud/pingpong:4.01v2
+          env:
+            - name: SERVER_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: pingpong-servport
+            - name: PGHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_hostaddr
+            - name: PGUSER
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_user
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pingpong-secret
+                  key: POSTGRES_PASSWORD
+            - name: PGDATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: postgres_db
+            - name: PGPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: pingpong-dbconfig
+                  key: pingpong_db_port
