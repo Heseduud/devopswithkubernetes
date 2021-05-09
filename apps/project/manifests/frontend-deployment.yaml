@@ -10,6 +10,8 @@ spec:
       app: project-frontend
   template:
     metadata:
+      annotations:
+        linkerd.io/inject: enabled
       labels:
         app: project-frontend
     spec:
