@@ -1,0 +1,12 @@
+Arguing for rancher vs openshift
+
+Rancher:
+	- Seems really easy to install (atleast for AWS and GKE in quickstart guide)
+	- Faster installation (according to https://www.kloia.com/blog/openshift-vs-rancher)
+	- 100% open source
+	- Easy-to-read guides open for all
+
+OpenShift:
+	- Vendor-lock
+	- "Openshift is reported to favor its own tools&practices"
+	- IBM product (yuck)
