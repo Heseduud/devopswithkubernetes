@@ -1,0 +1,15 @@
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: example
+spec:
+  url: http://example.com
+  image: heseduud/dummysite-app:v1
+---
+apiVersion: stable.dwk/v1
+kind: DummySite
+metadata:
+  name: mayhem
+spec:
+  url: http://google.com
+  image: heseduud/dummysite-app:v1
